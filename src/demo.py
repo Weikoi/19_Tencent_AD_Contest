@@ -1,7 +1,10 @@
 import pandas as pd
 
-a_dict = {1: {'A': 1, 'B': 2},
-          2: {'A': 1.1, 'B': 2.1}}
-df = pd.DataFrame(a_dict)
+a = [1,2,3,4]
+b =[3,4,5,6]
 
-print(df)
+a_dict = {"a":a,
+          "b":b
+        }
+
+print(pd.DataFrame(a_dict))

@@ -1,22 +1,22 @@
 import pandas as pd
 import pickle as pk
-from util.global_constant import RAW_DATA_PATH,RAW_DF_PATH
+from util.global_constant import RAW_DATA_PATH, RAW_DF_PATH
 
-file = open(RAW_DATA_PATH + "totalExposureLog.out")
+file = open(RAW_DATA_PATH + "user_data")
 
 lines = file.readlines()
 length = len(lines)
 
-ad_request_id = []
-ad_request_time = []
-ad_location_id = []
 user_id = []
-exp_ad_id = []
-exp_ad_size = []
-bid = []
-pctr = []
-quality_ecpm = []
-totalEcpm = []
+age = []
+area = []
+status = []
+education = []
+consumption_ability = []
+device = []
+work = []
+ConnectionType = []
+behavior = []
 
 for idx, line_raw in enumerate(lines):
     line = line_raw.split()
@@ -48,4 +48,4 @@ data_dict = {
 
 df = pd.DataFrame(data_dict)
 
-pk.dump(df, file=open(RAW_DF_PATH+"exp.pkl", 'wb'))
+pk.dump(df, file=open(RAW_DF_PATH + "exp.pkl", 'wb'))
