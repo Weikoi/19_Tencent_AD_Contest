@@ -1,11 +1,19 @@
 import pandas as pd
 import pickle as pk
-from util.global_constant import RAW_DATA_PATH,RAW_DF_PATH
+from util.global_constant import RAW_DATA_PATH, RAW_DF_PATH
+
+pd.set_option('display.max_columns', 20)
 
 file = open(RAW_DATA_PATH + "totalExposureLog.out")
 
-lines = file.readlines()
-length = len(lines)
+
+# lines_num 为 102386695
+# count = 0
+# for index, line in enumerate(file):
+#     count += 1
+# print(count)
+
+# 一百万条一个batch
 
 ad_request_id = []
 ad_request_time = []
@@ -18,7 +26,8 @@ pctr = []
 quality_ecpm = []
 totalEcpm = []
 
-for idx, line_raw in enumerate(lines):
+for idx in range(1000000):
+    line_raw = file.readline()
     line = line_raw.split()
     ad_request_id.append(eval(line[0]))
     ad_request_time.append(eval(line[1]))
@@ -31,7 +40,7 @@ for idx, line_raw in enumerate(lines):
     quality_ecpm.append(eval(line[8]))
     totalEcpm.append(eval(line[9]))
     if idx % 100 == 0:
-        print("\r当前进度: {:.2f}%".format(idx * 100 / length), end="")
+        print("\r当前进度: {:.2f}%".format((idx+1) * 100 / 1000000), end="")
 
 data_dict = {
     "ad_request_id": ad_request_id,
@@ -47,5 +56,6 @@ data_dict = {
 }
 
 df = pd.DataFrame(data_dict)
-
+print(df)
+#
 pk.dump(df, file=open(RAW_DF_PATH+"exp.pkl", 'wb'))
