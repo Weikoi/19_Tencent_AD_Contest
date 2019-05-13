@@ -4,9 +4,8 @@
 # @Email   : 854280599@qq.com
 # @File    : Redo_Dataload_Sample_Data.py
 import pandas as pd
+import pickle as pk
 import sys
-import operator
-from functools import reduce
 
 Test_Sample_Data = []
 Test_Sample_Data_columns = ['ad_id', 'ad_bid', 'num_click', 'Ad_material_size', 'Ad_Industry_Id', 'Commodity_type',
@@ -18,8 +17,9 @@ Test_Sample_Data.append(Test_Sample_Data_columns)
 int_num_click = -3
 
 # 测试样本中人群定向是all的时候 利用原始的user.data将数据集划分
-user_data = pd.read_csv('../Dataset/tencent-dataset-19/dataset-for-user/userFeature_1000.csv')
+user_data = pd.read_csv('../Dataset/dataset_for_train/userFeature.csv')
 print("*************user_data************", user_data.info())
+
 User_age = user_data['Age'].drop_duplicates(keep='first', inplace=False)
 User_age = list(User_age)
 User_age = [str(x) for x in User_age]
@@ -36,20 +36,28 @@ User_Area = user_data['Area']
 User_Area = list(User_Area)
 for i, temp_line in enumerate(User_Area):
     User_Area[i] = temp_line.strip().split(',')
-User_Area = reduce(operator.add, User_Area)
+print(User_Area)
+
+result = []
+
+for idx, i in enumerate(User_Area):
+    result += i
+    if idx % 100 == 0:
+        print("\r当前进度: {:.2f}%".format((idx + 1) * 100 / 1396718), end="")
 # print("User_Area转化成一维数组之后前20个数据是", User_Area[0:20], type(User_Area))
-User_Area_set = list(set(User_Area))
+User_Area_set = list(set(result))
+
 # print("User_Area经过去重之后前20个数据是", User_Area_set[0:20], len(User_Area_set))
 User_Area = [str(x) for x in User_Area]
 all_Area = ' '.join(User_Area)
-print("all_Area的类型是:\n", type(all_Area), type(all_Area[1]), )
+# print("all_Area的类型是:\n", type(all_Area), type(all_Area[1]), )
 # print("在用户文件之中地域的取值为:\n", all_Area[0:10], len(all_Area))
 
 User_Education = user_data['Education'].drop_duplicates(keep='first', inplace=False)
 User_Education = list(User_Education)
 User_Education = [str(x) for x in User_Education]
 all_Education = ' '.join(User_Education)
-print("all_Education的类型是:\n", len(all_Education), type(all_Education), type(all_Education[1]))
+# print("all_Education的类型是:\n", len(all_Education), type(all_Education), type(all_Education[1]))
 
 User_Consuption_Ability = user_data['Consuption_Ability'].drop_duplicates(keep='first', inplace=False)
 User_Consuption_Ability = list(User_Consuption_Ability)
@@ -70,13 +78,21 @@ for i, temp_line in enumerate(User_Work_Status):
         User_Work_Status[i] = temp_line.strip().split(',')
     else:
         User_Work_Status[i] = list(temp_line)
+
 # print("经过修改操作之后的User_Work_Status是:", User_Work_Status[0:10], type(User_Work_Status))
-User_Work_Status = reduce(operator.add, User_Work_Status)
-User_Work_Status = list(set(User_Work_Status))
+print("User_Work_Status")
+status_result = []
+for idx, i in enumerate(User_Work_Status):
+    status_result += i
+    if idx % 1000 == 0:
+        print("\r当前进度: {:.2f}%".format((idx + 1) * 100 / len(User_Work_Status)), end="")
+User_Work_Status = list(set(status_result))
 User_Work_Status = [str(x) for x in User_Work_Status]
 all_Work_Status = ' '.join(User_Work_Status)
 # print("最后User_Work_Status的取值范围是:\n", all_Work_Status)
 
+
+print("User_Connection_Type")
 User_Connection_Type = user_data['Connection_Type'].drop_duplicates(keep='first', inplace=False)
 User_Connection_Type = list(User_Connection_Type)
 User_Connection_Type = [str(x) for x in User_Connection_Type]
@@ -85,28 +101,34 @@ all_Connection_Type = ' '.join(User_Connection_Type)
 # 该方法的目的是找到Behavior中所有唯一值，当出现all的时候 将Behavior的值赋值给该条数据，
 # 但是发现数据集中Behavior太多 暂时不执行该操作
 User_Behavior = user_data['Behavior']
-User_Behavior = list(User_Behavior)
-print("原始数据集中用户行为的结果为:\n", type(User_Behavior[0:-1]))
+
+print("原始数据集中用户行为的结果为:\n", type(User_Behavior))
 # 将二维数组转化成一维数组
 for i, temp_line in enumerate(User_Behavior):
     if ',' in temp_line:
         User_Behavior[i] = temp_line.strip().split(',')
     else:
-        print("Behavior中异常的数据是:", User_Behavior[i])
         User_Behavior[i] = list(temp_line)
         # del User_Behavior[i]
 # User_Behavior.pop(0)
 # 首先将数据降维到一维数组 然后去掉list中重复的元素
-User_Behavior = reduce(operator.add, User_Behavior)
-User_Behavior = list(set(User_Behavior))
+result_behavior = []
+for idx, i in enumerate(User_Behavior):
+    result_behavior += i
+    if idx % 1000 == 0:
+        print("\r当前进度: {:.2f}%".format((idx + 1) * 100 / len(User_Behavior)), end="")
+
+User_Behavior = list(set(result_behavior))
 Str_User_Behavior = [str(x) for x in User_Behavior]
 all_Behavior = ' '.join(Str_User_Behavior)
 print("用户数据集中Behavior的取值范围是", len(User_Behavior))
 print("用户数据集中所有的属性值已加载完毕！！！！")
 
 # 需要重写测试集中的人群定向
-with open('../Dataset/tencent-dataset-19/test_sample.dat', 'r') as f:
+with open('../test_sample.dat', 'r') as f:
     for i, line in enumerate(f):
+        if i % 100 == 0:
+            print("\r当前进度: {:.2f}%".format((i + 1) * 100 / 20290), end="")
         # 测试的时候使用的数据
         # if i >= 3:
         # break
@@ -213,5 +235,3 @@ with open('../Dataset/tencent-dataset-19/test_sample.dat', 'r') as f:
 # 测试成功！！！！！数据集保存正确
 user_feature = pd.DataFrame(Test_Sample_Data)
 user_feature.to_csv('../Dataset/dataset_for_train/Test_Sample_Data_all.csv', index=False, header=None)
-
-

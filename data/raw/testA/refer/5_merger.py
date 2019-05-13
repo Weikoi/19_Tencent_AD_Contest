@@ -8,7 +8,7 @@ import datetime
 import numpy as np
 
 # 生成点击数并且暂时删除测试集中没有的属性
-Total_Exposure_Log_Data = pd.read_csv('../Dataset/dataset_for_train/Total_Exposure_Log_Data.csv')
+Total_Exposure_Log_Data = pd.read_csv('../Dataset/data/Total_Exposure_Log_Data.csv')
 print("原始数据集中的样式是:\n", Total_Exposure_Log_Data.info())
 tfa = Total_Exposure_Log_Data.Ad_Request_Time.astype(str).apply(lambda x: datetime.datetime(int(x[:4]),
                                                                                             int(x[5:7]),
