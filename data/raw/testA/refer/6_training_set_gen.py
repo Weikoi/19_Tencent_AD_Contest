@@ -53,7 +53,7 @@ people_line.append(people_line_columns)
 
 # 从user_data中提取相关的属性信息
 # 测试样本中人群定向是all的时候 利用原始的user.data将数据集划分
-user_data = pd.read_csv('../Dataset/tencent-dataset-19/dataset-for-user/userFeature_1000.csv')
+user_data = pd.read_csv('../Dataset/dataset_for_train/userFeature.csv')
 print("*************user_data************", user_data.info())
 User_age = user_data['Age'].drop_duplicates(keep='first', inplace=False)
 User_age = list(User_age)
