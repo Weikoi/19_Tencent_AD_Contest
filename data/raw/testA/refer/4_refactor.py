@@ -16,21 +16,34 @@ Test_Sample_Data_columns = ['ad_id', 'ad_bid', 'num_click', 'Ad_material_size', 
 Test_Sample_Data.append(Test_Sample_Data_columns)
 int_num_click = -3
 
+
+"""
+用户数据信息处理
+"""
 # 测试样本中人群定向是all的时候 利用原始的user.data将数据集划分
 user_data = pd.read_csv('../Dataset/dataset_for_train/userFeature.csv')
 print("*************user_data************", user_data.info())
 
+"""
+用户年龄
+"""
 User_age = user_data['Age'].drop_duplicates(keep='first', inplace=False)
 User_age = list(User_age)
 User_age = [str(x) for x in User_age]
 all_age = ' '.join(User_age)
 # print("all_age的样式是:\n", all_age, type(all_age))
 
+"""
+用户性别
+"""
 User_Gender = user_data['Gender'].drop_duplicates(keep='first', inplace=False)
 User_Gender = list(User_Gender)
 User_Gender = [str(x) for x in User_Gender]
 all_Gender = ' '.join(User_Gender)
 
+"""
+用户地域
+"""
 # 因为地域这列属性可以取多值 所以需要对其合并成一维数组之后 然后在执行去重操作
 User_Area = user_data['Area']
 User_Area = list(User_Area)
@@ -39,36 +52,46 @@ for i, temp_line in enumerate(User_Area):
 print(User_Area)
 
 result = []
-
 for idx, i in enumerate(User_Area):
     result += i
     if idx % 100 == 0:
         print("\r当前进度: {:.2f}%".format((idx + 1) * 100 / 1396718), end="")
 # print("User_Area转化成一维数组之后前20个数据是", User_Area[0:20], type(User_Area))
 User_Area_set = list(set(result))
-
 # print("User_Area经过去重之后前20个数据是", User_Area_set[0:20], len(User_Area_set))
 User_Area = [str(x) for x in User_Area]
 all_Area = ' '.join(User_Area)
 # print("all_Area的类型是:\n", type(all_Area), type(all_Area[1]), )
 # print("在用户文件之中地域的取值为:\n", all_Area[0:10], len(all_Area))
 
+"""
+用户学历
+"""
 User_Education = user_data['Education'].drop_duplicates(keep='first', inplace=False)
 User_Education = list(User_Education)
 User_Education = [str(x) for x in User_Education]
 all_Education = ' '.join(User_Education)
 # print("all_Education的类型是:\n", len(all_Education), type(all_Education), type(all_Education[1]))
 
+"""
+用户消费级别
+"""
 User_Consuption_Ability = user_data['Consuption_Ability'].drop_duplicates(keep='first', inplace=False)
 User_Consuption_Ability = list(User_Consuption_Ability)
 User_Consuption_Ability = [str(x) for x in User_Consuption_Ability]
 all_Consuption_Ability = ' '.join(User_Consuption_Ability)
 
+"""
+用户年登录设备
+"""
 User_Device = user_data['Device'].drop_duplicates(keep='first', inplace=False)
 User_Device = list(User_Device)
 User_Device = [str(x) for x in User_Device]
 all_Device = ' '.join(User_Device)
 
+"""
+用户工作信息
+"""
 # 对于工作可能是取多值的情况 所以参照地域的取值方式
 User_Work_Status = user_data['Work_Status']
 User_Work_Status = list(User_Work_Status)
@@ -91,13 +114,19 @@ User_Work_Status = [str(x) for x in User_Work_Status]
 all_Work_Status = ' '.join(User_Work_Status)
 # print("最后User_Work_Status的取值范围是:\n", all_Work_Status)
 
-
+"""
+用户网络信息
+"""
 print("User_Connection_Type")
 User_Connection_Type = user_data['Connection_Type'].drop_duplicates(keep='first', inplace=False)
 User_Connection_Type = list(User_Connection_Type)
 User_Connection_Type = [str(x) for x in User_Connection_Type]
 all_Connection_Type = ' '.join(User_Connection_Type)
 
+
+"""
+用户行为信息，此维度数据量巨大，难以处理
+"""
 # 该方法的目的是找到Behavior中所有唯一值，当出现all的时候 将Behavior的值赋值给该条数据，
 # 但是发现数据集中Behavior太多 暂时不执行该操作
 User_Behavior = user_data['Behavior']
@@ -123,6 +152,7 @@ Str_User_Behavior = [str(x) for x in User_Behavior]
 all_Behavior = ' '.join(Str_User_Behavior)
 print("用户数据集中Behavior的取值范围是", len(User_Behavior))
 print("用户数据集中所有的属性值已加载完毕！！！！")
+
 
 # 需要重写测试集中的人群定向
 with open('../test_sample.dat', 'r') as f:
