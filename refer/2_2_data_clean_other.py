@@ -7,7 +7,7 @@ import pandas as pd
 import time
 
 # 当load_ad值为 Static_Ad 表示清洗的是静态数据集
-load_ad = 'op_Ad'
+load_ad = 'other'
 
 if load_ad == 'Static_Ad':
     # 将静态广告(ad_static_feature)转化成csv格式 对于创建时间这一列的数据集没有转化时间 待做 未完成
@@ -20,7 +20,7 @@ if load_ad == 'Static_Ad':
 
     # 为数据集增加列名称
     Ad_Static_Feature_Data.append(Ad_Static_Feature_Data_columns)
-    with open('../ad_static_feature.out', 'r') as f:
+    with open('../data/raw/ad_static_feature.out', 'r') as f:
         for i, line in enumerate(f):
             # print(i, ':', line,'\n', len(line), type(line))
             line = line.strip().split('\t')
@@ -49,20 +49,20 @@ if load_ad == 'Static_Ad':
             line[1] = time.strftime("%Y-%m-%d %H:%M:%S", time_local)
 
             Ad_Static_Feature_Data.append(line)
-    print("***********userFeature_data[0]:\n", Ad_Static_Feature_Data[1])
-    print("***********userFeature_data[0][1]:\n", Ad_Static_Feature_Data[1][0])
+    print("============userFeature_data[0]:============\n", Ad_Static_Feature_Data[1])
+    print("============userFeature_data[0][1]:=========\n", Ad_Static_Feature_Data[1][0])
 
     user_feature = pd.DataFrame(Ad_Static_Feature_Data)
-    user_feature.to_csv('../Dataset/dataset_for_train/Ad_Static_Feature_Data.csv', index=False,
+    user_feature.to_csv('../data/dataset/process/Ad_Static_Feature_Data.csv', index=False,
                         header=False)
 
     '''
     # 使用pandas删除不需要的列元素 测试完成 暂时不使用
-    remove_data = pd.read_csv('../Dataset/dataset_for_train/Ad_Static_Feature_Data_redo.csv')
+    remove_data = pd.read_csv('../dataset/dataset_for_train/Ad_Static_Feature_Data_redo.csv')
     print(remove_data.info())
     remove_data = remove_data.drop(['Ad_account_id'], axis=1)
     remove_data = remove_data.drop(['Commodity_id'], axis=1)
-    remove_data.to_csv('../Dataset/dataset_for_train/Ad_Static_Feature_Data_redo.csv', index=False)
+    remove_data.to_csv('../dataset/dataset_for_train/Ad_Static_Feature_Data_redo.csv', index=False)
     '''
 else:
     import linecache
@@ -73,18 +73,18 @@ else:
 
 
     def get_next_line(i_row):
-        line = linecache.getline('../ad_operation.dat', (i_row))
+        line = linecache.getline('../data/raw/ad_operation.dat', (i_row))
         line = line.strip().split('\t')
         # print("当前数据行的值是:", line)
 
-        line_next = linecache.getline('../ad_operation.dat', (i_row + 1))
+        line_next = linecache.getline('../data/raw/ad_operation.dat', (i_row + 1))
         line_next = line_next.strip().split('\t')
 
         return line_next
 
 
     # 读取静态广告数据集中的广告ID将其转化成list数据
-    Exposure_Log_Data = pd.read_csv('../Dataset/dataset_for_train/Ad_Static_Feature_Data.csv')
+    Exposure_Log_Data = pd.read_csv('../data/dataset/process/Ad_Static_Feature_Data.csv')
 
     Ad_id_in_static = Exposure_Log_Data['ad_id']
     Ad_time_in_static = Exposure_Log_Data['Creation_time']
@@ -108,14 +108,14 @@ else:
     Ad_Operation_Data.append(Ad_Operation_Data_columns)
 
     All_kind_ad = []
-    with open('../ad_operation.dat', 'r') as f:
+    with open('../data/raw/ad_operation.dat', 'r') as f:
         for i, line in enumerate(f):
             # print(i, ':', line, '\n', len(line), type(line))
             line = line.strip().split('\t')
             # print(i, ':', line, '\n', len(line), type(line[2]))
 
             if (i % 10000) == 0:
-                print("***********我已经执行了%d行" % (i))
+                print("============== ad operation数据已经执行了 %d 行===============" % (i))
 
             # 首先需要判断该条数据是否在静态数据集之中 不存在则删除
             if int(line[0]) not in list_Ad_id_in_static:
@@ -182,4 +182,4 @@ else:
     # print("***********userFeature_data[0][1]:\n", Ad_Operation_Data[9][1])
 
     Ad_Operation_Data = pd.DataFrame(Ad_Operation_Data)
-    Ad_Operation_Data.to_csv('../Dataset/dataset_for_train/Ad_Operation_Data.csv', index=False, header=False)
+    Ad_Operation_Data.to_csv('../data/dataset/process/Ad_Operation_Data.csv', index=False, header=False)

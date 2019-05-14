@@ -2,11 +2,11 @@ import pandas as pd
 import numpy as np
 import pickle as pk
 import time
-from util.global_constant import RAW_DATA_PATH, RAW_DF_PATH
+from util.global_constant import RAW_DATA_PATH, RAW_DF_PATH, TEMP_DATA_PATH
 
 pd.set_option('display.max_columns', 30)
 
-file = open(RAW_DATA_PATH + "ad_operation.out")
+file = open(RAW_DATA_PATH + "ad_operation.dat")
 lines = file.readlines()
 
 ad_id = []
@@ -51,4 +51,4 @@ operation_id_set = set(ad_id)
 
 print(operation_id_set)
 
-pk.dump(operation_id_set, file=open(RAW_DF_PATH + "operation_id_set.pkl", 'wb'))
+pk.dump(operation_id_set, file=open(TEMP_DATA_PATH + "operation_id_set.pkl", 'wb'))

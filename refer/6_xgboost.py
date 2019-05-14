@@ -13,6 +13,7 @@ from sklearn.preprocessing import Imputer
 
 pd.set_option('precision', 4)
 
+
 def loadDataset(filePath):
     df = pd.read_csv(filepath_or_buffer=filePath)
     return df
@@ -54,7 +55,8 @@ def loadTestData(filePath):
 
 def trainandTest(X_train, y_train, X_test):
     # XGBoost训练过程
-    model = xgb.XGBRegressor(max_depth=5, learning_rate=0.1, n_estimators=160, silent=False, objective='reg:gamma')
+    model = xgb.XGBRegressor(max_depth=5, learning_rate=0.1, n_jobs=-1, n_estimators=160, silent=False,
+                             objective='reg:gamma')
     model.fit(X_train, y_train)
 
     # 对测试集进行预测 并且对预测结果保留四位有效数字
@@ -86,8 +88,8 @@ def trainandTest(X_train, y_train, X_test):
 
 
 if __name__ == '__main__':
-    trainFilePath = '../Dataset/dataset_for_train/result_for_train_all.csv'
-    testFilePath = '../Dataset/dataset_for_train/Test_Sample_Data_all.csv'
+    trainFilePath = '../dataset/dataset_for_train/result_for_train_all.csv'
+    testFilePath = '../dataset/dataset_for_train/Test_Sample_Data_all.csv'
     print("==================正在加载数据集==================")
     data = loadDataset(trainFilePath)
     # print("训练集中的数据信息是:\n", data.info())

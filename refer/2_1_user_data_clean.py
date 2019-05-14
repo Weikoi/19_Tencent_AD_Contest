@@ -25,7 +25,7 @@ mode = "1000"
 
 if mode == 'all':
     userFeature_data.append(user_Feature_columns)
-    with open('../user_data', 'r') as f:
+    with open('../data/raw/user_data', 'r') as f:
         for i, line in enumerate(f):
             # print(i, ':', line,'\n', len(line), type(line))
             line = line.strip().split('\t')
@@ -34,15 +34,15 @@ if mode == 'all':
             #     break
             userFeature_data.append(line)
 
-    print("***********userFeature_data[0]:\n", userFeature_data[1])
-    print("***********userFeature_data[0][1]:\n", userFeature_data[1][0])
+    print("==============userFeature_data[0]:============\n", userFeature_data[1])
+    print("==============userFeature_data[0][1]:=========\n", userFeature_data[1][0])
     user_feature = pd.DataFrame(userFeature_data)
-    print("***********正在保存数据集************")
-    user_feature.to_csv('../Dataset/dataset_for_train/userFeature.csv', index=False, header=False)
+    print("==============正在保存数据集=============")
+    user_feature.to_csv('../data/dataset/process/userFeature.csv', index=False, header=False)
 
 if mode == '1000':
     userFeature_data.append(user_Feature_columns)
-    with open('../user_data', 'r') as f:
+    with open('../data/raw/user_data', 'r') as f:
         for i, line in enumerate(f):
             # print(i, ':', line,'\n', len(line), type(line))
             line = line.strip().split('\t')
@@ -51,9 +51,9 @@ if mode == '1000':
                 break
             userFeature_data.append(line)
 
-    print("***********userFeature_data[0]:\n", userFeature_data[1])
-    print("***********userFeature_data[0][1]:\n", userFeature_data[1][0])
+    print("***********userFeature_data[0]:==============\n", userFeature_data[1])
+    print("***********userFeature_data[0][1]:============\n", userFeature_data[1][0])
     user_feature = pd.DataFrame(userFeature_data)
     print("***********正在保存数据集************")
-    user_feature.to_csv('../Dataset/dataset_for_train/userFeature1000.csv', index=False, header=False)
+    user_feature.to_csv('../data/dataset/process/userFeature1000.csv', index=False, header=False)
 

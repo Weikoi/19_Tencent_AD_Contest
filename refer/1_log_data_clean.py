@@ -57,8 +57,8 @@ Exposure_Log_Data_columns = ['Ad_Request_id', 'Ad_Request_Time', 'Ad_pos_id', 'u
 
 # 为数据集增加列名称
 # Total_Exposure_Log_Data.append(Exposure_Log_Data_columns)
-list_Ad_op_id = pk.load(open("../../DF/" + "operation_id_set.pkl", "rb"))
-with open('../totalExposureLog.out', 'r') as f:
+list_Ad_op_id = pk.load(open("../data/temp/" + "operation_id_set.pkl", "rb"))
+with open('../data/raw/totalExposureLog.out', 'r') as f:
     num = 0
     for i, line in enumerate(f):
         # if i == 0:
@@ -72,7 +72,7 @@ with open('../totalExposureLog.out', 'r') as f:
         # sys.exit()
 
         if (i % 5000000) == 0:
-            print("*******我已经执行了", i)
+            print("======= exp log 数据已经执行了", i, "条=======")
 
         # 如果数据集中有缺失的数据 直接跳过该条数据
         if line[0] == '0' or line[1] == '0' or line[2] == '0' or line[3] == '0' or line[4] == '0' or line[5] == '0' \
@@ -319,193 +319,193 @@ with open('../totalExposureLog.out', 'r') as f:
 
 # 保存广告记录是16号的数据
 Exposure_data_16 = pd.DataFrame(Total_Exposure_Log_Data_16)
-Exposure_data_16.to_csv('data/Total_Exposure_Log_Data_16.csv'
+Exposure_data_16.to_csv('../data/temp/Total_Exposure_Log_Data_16.csv'
                         , index=False, header=None)
 del Exposure_data_16, Total_Exposure_Log_Data_16
 
 # 保存广告记录是17号的数据
 Exposure_data_17 = pd.DataFrame(Total_Exposure_Log_Data_17)
-Exposure_data_17.to_csv('data/Total_Exposure_Log_Data_17.csv'
+Exposure_data_17.to_csv('../data/temp/Total_Exposure_Log_Data_17.csv'
                         , index=False, header=None)
 del Exposure_data_17, Total_Exposure_Log_Data_17
 
 # 保存广告记录是18号的数据
 Exposure_data_18 = pd.DataFrame(Total_Exposure_Log_Data_18)
-Exposure_data_18.to_csv('data/Total_Exposure_Log_Data_18.csv'
+Exposure_data_18.to_csv('../data/temp/Total_Exposure_Log_Data_18.csv'
                         , index=False, header=None)
 del Exposure_data_18, Total_Exposure_Log_Data_18
 
 # 保存广告记录是19号的数据
 Exposure_data_19 = pd.DataFrame(Total_Exposure_Log_Data_19)
-Exposure_data_19.to_csv('data/Total_Exposure_Log_Data_19.csv'
+Exposure_data_19.to_csv('../data/temp/Total_Exposure_Log_Data_19.csv'
                         , index=False, header=None)
 del Exposure_data_19, Total_Exposure_Log_Data_19
 
 # 保存广告记录是20号的数据
 Exposure_data_20 = pd.DataFrame(Total_Exposure_Log_Data_20)
-Exposure_data_20.to_csv('data/Total_Exposure_Log_Data_20.csv'
+Exposure_data_20.to_csv('../data/temp/Total_Exposure_Log_Data_20.csv'
                         , index=False, header=None)
 del Exposure_data_20, Total_Exposure_Log_Data_20
 
 # 保存广告记录是21号的数据
 Exposure_data_21 = pd.DataFrame(Total_Exposure_Log_Data_21)
-Exposure_data_21.to_csv('data/Total_Exposure_Log_Data_21.csv'
+Exposure_data_21.to_csv('../data/temp/Total_Exposure_Log_Data_21.csv'
                         , index=False, header=None)
 del Exposure_data_21, Total_Exposure_Log_Data_21
 
 # 保存广告记录是22号的数据
 Exposure_data_22 = pd.DataFrame(Total_Exposure_Log_Data_22)
-Exposure_data_22.to_csv('data/Total_Exposure_Log_Data_22.csv'
+Exposure_data_22.to_csv('../data/temp/Total_Exposure_Log_Data_22.csv'
                         , index=False, header=None)
 del Exposure_data_22, Total_Exposure_Log_Data_22
 
 # 保存广告记录是23号的数据
 Exposure_data_23 = pd.DataFrame(Total_Exposure_Log_Data_23)
-Exposure_data_23.to_csv('data/Total_Exposure_Log_Data_23.csv'
+Exposure_data_23.to_csv('../data/temp/Total_Exposure_Log_Data_23.csv'
                         , index=False, header=None)
 del Exposure_data_23, Total_Exposure_Log_Data_23
 
 # 保存广告记录是24号的数据
 Exposure_data_24 = pd.DataFrame(Total_Exposure_Log_Data_24)
-Exposure_data_24.to_csv('data/Total_Exposure_Log_Data_24.csv'
+Exposure_data_24.to_csv('../data/temp/Total_Exposure_Log_Data_24.csv'
                         , index=False, header=None)
 del Exposure_data_24, Total_Exposure_Log_Data_24
 
 # 保存广告记录是25号的数据
 Exposure_data_25 = pd.DataFrame(Total_Exposure_Log_Data_25)
-Exposure_data_25.to_csv('data/Total_Exposure_Log_Data_25.csv'
+Exposure_data_25.to_csv('../data/temp/Total_Exposure_Log_Data_25.csv'
                         , index=False, header=None)
 del Exposure_data_25, Total_Exposure_Log_Data_25
 
 # 保存广告记录是26号的数据
 Exposure_data_26 = pd.DataFrame(Total_Exposure_Log_Data_26)
-Exposure_data_26.to_csv('data/Total_Exposure_Log_Data_26.csv'
+Exposure_data_26.to_csv('../data/temp/Total_Exposure_Log_Data_26.csv'
                         , index=False, header=None)
 del Exposure_data_26, Total_Exposure_Log_Data_26
 
 # 保存广告记录是27号的数据
 Exposure_data_27 = pd.DataFrame(Total_Exposure_Log_Data_27)
-Exposure_data_27.to_csv('data/Total_Exposure_Log_Data_27.csv'
+Exposure_data_27.to_csv('../data/temp/Total_Exposure_Log_Data_27.csv'
                         , index=False, header=None)
 del Exposure_data_27, Total_Exposure_Log_Data_27
 
 # 保存广告记录是28号的数据
 Exposure_data_28 = pd.DataFrame(Total_Exposure_Log_Data_28)
-Exposure_data_28.to_csv('data/Total_Exposure_Log_Data_28.csv'
+Exposure_data_28.to_csv('../data/temp/Total_Exposure_Log_Data_28.csv'
                         , index=False, header=None)
 del Exposure_data_28, Total_Exposure_Log_Data_28
 
 # 保存广告记录是3月1号的数据
 Exposure_data_301 = pd.DataFrame(Total_Exposure_Log_Data_301)
-Exposure_data_301.to_csv('data/Total_Exposure_Log_Data_0301.csv'
+Exposure_data_301.to_csv('../data/temp/Total_Exposure_Log_Data_0301.csv'
                          , index=False, header=None)
 del Exposure_data_301, Total_Exposure_Log_Data_301
 
 # 保存广告记录是3月2号的数据
 Exposure_data_302 = pd.DataFrame(Total_Exposure_Log_Data_302)
-Exposure_data_302.to_csv('data/Total_Exposure_Log_Data_0302.csv'
+Exposure_data_302.to_csv('../data/temp/Total_Exposure_Log_Data_0302.csv'
                          , index=False, header=None)
 del Exposure_data_302, Total_Exposure_Log_Data_302
 
 # 保存广告记录是3月3号的数据
 Exposure_data_303 = pd.DataFrame(Total_Exposure_Log_Data_303)
-Exposure_data_303.to_csv('data/Total_Exposure_Log_Data_0303.csv'
+Exposure_data_303.to_csv('../data/temp/Total_Exposure_Log_Data_0303.csv'
                          , index=False, header=None)
 del Exposure_data_303, Total_Exposure_Log_Data_303
 
 # 保存广告记录是3月4号的数据
 Exposure_data_304 = pd.DataFrame(Total_Exposure_Log_Data_304)
-Exposure_data_304.to_csv('data/Total_Exposure_Log_Data_0304.csv'
+Exposure_data_304.to_csv('../data/temp/Total_Exposure_Log_Data_0304.csv'
                          , index=False, header=None)
 del Exposure_data_304, Total_Exposure_Log_Data_304
 
 # 保存广告记录是3月5号的数据
 Exposure_data_305 = pd.DataFrame(Total_Exposure_Log_Data_305)
-Exposure_data_305.to_csv('data/Total_Exposure_Log_Data_0305.csv'
+Exposure_data_305.to_csv('../data/temp/Total_Exposure_Log_Data_0305.csv'
                          , index=False, header=None)
 del Exposure_data_305, Total_Exposure_Log_Data_305
 
 # 保存广告记录是3月6号的数据
 Exposure_data_306 = pd.DataFrame(Total_Exposure_Log_Data_306)
-Exposure_data_306.to_csv('data/Total_Exposure_Log_Data_0306.csv'
+Exposure_data_306.to_csv('../data/temp/Total_Exposure_Log_Data_0306.csv'
                          , index=False, header=None)
 del Exposure_data_306, Total_Exposure_Log_Data_306
 
 # 保存广告记录是3月7号的数据
 Exposure_data_307 = pd.DataFrame(Total_Exposure_Log_Data_307)
-Exposure_data_307.to_csv('data/Total_Exposure_Log_Data_0307.csv'
+Exposure_data_307.to_csv('../data/temp/Total_Exposure_Log_Data_0307.csv'
                          , index=False, header=None)
 del Exposure_data_307, Total_Exposure_Log_Data_307
 
 # 保存广告记录是3月8号的数据
 Exposure_data_308 = pd.DataFrame(Total_Exposure_Log_Data_308)
-Exposure_data_308.to_csv('data/Total_Exposure_Log_Data_0308.csv'
+Exposure_data_308.to_csv('../data/temp/Total_Exposure_Log_Data_0308.csv'
                          , index=False, header=None)
 del Exposure_data_308, Total_Exposure_Log_Data_308
 
 # 保存广告记录是3月9号的数据
 Exposure_data_309 = pd.DataFrame(Total_Exposure_Log_Data_309)
-Exposure_data_309.to_csv('data/Total_Exposure_Log_Data_0309.csv'
+Exposure_data_309.to_csv('../data/temp/Total_Exposure_Log_Data_0309.csv'
                          , index=False, header=None)
 del Exposure_data_309, Total_Exposure_Log_Data_309
 
 # 保存广告记录是3月10号的数据
 Exposure_data_310 = pd.DataFrame(Total_Exposure_Log_Data_310)
-Exposure_data_310.to_csv('data/Total_Exposure_Log_Data_0310.csv'
+Exposure_data_310.to_csv('../data/temp/Total_Exposure_Log_Data_0310.csv'
                          , index=False, header=None)
 del Exposure_data_310, Total_Exposure_Log_Data_310
 
 # 保存广告记录是3月11号的数据
 Exposure_data_311 = pd.DataFrame(Total_Exposure_Log_Data_311)
-Exposure_data_311.to_csv('data/Total_Exposure_Log_Data_0311.csv'
+Exposure_data_311.to_csv('../data/temp/Total_Exposure_Log_Data_0311.csv'
                          , index=False, header=None)
 del Exposure_data_311, Total_Exposure_Log_Data_311
 
 # 保存广告记录是3月12号的数据
 Exposure_data_312 = pd.DataFrame(Total_Exposure_Log_Data_312)
-Exposure_data_312.to_csv('data/Total_Exposure_Log_Data_0312.csv'
+Exposure_data_312.to_csv('../data/temp/Total_Exposure_Log_Data_0312.csv'
                          , index=False, header=None)
 del Exposure_data_312, Total_Exposure_Log_Data_312
 
 # 保存广告记录是3月13号的数据
 Exposure_data_313 = pd.DataFrame(Total_Exposure_Log_Data_313)
-Exposure_data_313.to_csv('data/Total_Exposure_Log_Data_0313.csv'
+Exposure_data_313.to_csv('../data/temp/Total_Exposure_Log_Data_0313.csv'
                          , index=False, header=None)
 del Exposure_data_313, Total_Exposure_Log_Data_313
 
 # 保存广告记录是3月14号的数据
 Exposure_data_314 = pd.DataFrame(Total_Exposure_Log_Data_314)
-Exposure_data_314.to_csv('data/Total_Exposure_Log_Data_0314.csv'
+Exposure_data_314.to_csv('../data/temp/Total_Exposure_Log_Data_0314.csv'
                          , index=False, header=None)
 del Exposure_data_314, Total_Exposure_Log_Data_314
 
 # 保存广告记录是3月15号的数据
 Exposure_data_315 = pd.DataFrame(Total_Exposure_Log_Data_315)
-Exposure_data_315.to_csv('data/Total_Exposure_Log_Data_0315.csv'
+Exposure_data_315.to_csv('../data/temp/Total_Exposure_Log_Data_0315.csv'
                          , index=False, header=None)
 del Exposure_data_315, Total_Exposure_Log_Data_315
 
 # 保存广告记录是3月16号的数据
 Exposure_data_316 = pd.DataFrame(Total_Exposure_Log_Data_316)
-Exposure_data_316.to_csv('data/Total_Exposure_Log_Data_0316.csv'
+Exposure_data_316.to_csv('../data/temp/Total_Exposure_Log_Data_0316.csv'
                          , index=False, header=None)
 del Exposure_data_316, Total_Exposure_Log_Data_316
 
 # 保存广告记录是3月17号的数据
 Exposure_data_317 = pd.DataFrame(Total_Exposure_Log_Data_317)
-Exposure_data_317.to_csv('data/Total_Exposure_Log_Data_0317.csv'
+Exposure_data_317.to_csv('../data/temp/Total_Exposure_Log_Data_0317.csv'
                          , index=False, header=None)
 del Exposure_data_317, Total_Exposure_Log_Data_317
 
 # 保存广告记录是3月18号的数据
 Exposure_data_318 = pd.DataFrame(Total_Exposure_Log_Data_318)
-Exposure_data_318.to_csv('data/Total_Exposure_Log_Data_0318.csv'
+Exposure_data_318.to_csv('../data/temp/Total_Exposure_Log_Data_0318.csv'
                          , index=False, header=None)
 del Exposure_data_318, Total_Exposure_Log_Data_318
 
 # 保存广告记录是3月19号的数据
 Exposure_data_319 = pd.DataFrame(Total_Exposure_Log_Data_319)
-Exposure_data_319.to_csv('data/Total_Exposure_Log_Data_0319.csv'
+Exposure_data_319.to_csv('../data/temp/Total_Exposure_Log_Data_0319.csv'
                          , index=False, header=None)
 del Exposure_data_319, Total_Exposure_Log_Data_319
 
@@ -516,22 +516,22 @@ Exposure_Log_Data_columns = ['Ad_Request_id', 'Ad_Request_Time', 'Ad_pos_id', 'u
                              'Ad_bid', 'Ad_pctr', 'Ad_quality_ecpm', 'Ad_total_Ecpm']
 
 Total_Exposure_Log_Data_February = pd.concat(
-    [pd.read_csv('../Dataset/data/Total_Exposure_Log_Data_' + str(i) + '.csv', names=Exposure_Log_Data_columns)
+    [pd.read_csv('../data/temp/Total_Exposure_Log_Data_' + str(i) + '.csv', names=Exposure_Log_Data_columns)
      for i in range(16, 29)]).reset_index(drop=True)
 
-Total_Exposure_Log_Data_February.to_csv('../Dataset/data/Total_Exposure_Log_Data_February.csv', index=False,
+Total_Exposure_Log_Data_February.to_csv('../data/temp/Total_Exposure_Log_Data_February.csv', index=False,
                                         header=Exposure_Log_Data_columns)
 
 Total_Exposure_Log_Data_March = pd.concat(
-    [pd.read_csv('../Dataset/data/Total_Exposure_Log_Data_03' + str(i).zfill(2) + '.csv',
+    [pd.read_csv('../data/temp/Total_Exposure_Log_Data_03' + str(i).zfill(2) + '.csv',
                  names=Exposure_Log_Data_columns) for i
      in range(1, 20)]).reset_index(drop=True)
 
-Total_Exposure_Log_Data_March.to_csv('../Dataset/data/Total_Exposure_Log_Data_March.csv', index=False)
+Total_Exposure_Log_Data_March.to_csv('../data/temp/Total_Exposure_Log_Data_March.csv', index=False)
 
-df_February = pd.read_csv('../Dataset/data/Total_Exposure_Log_Data_February.csv')
-df_March = pd.read_csv('../Dataset/data/Total_Exposure_Log_Data_March.csv')
+df_February = pd.read_csv('../data/temp/Total_Exposure_Log_Data_February.csv')
+df_March = pd.read_csv('../data/temp/Total_Exposure_Log_Data_March.csv')
 
 Total_Exposure_Log_Data = pd.concat([df_February, df_March]).reset_index(drop=True)
-Total_Exposure_Log_Data.to_csv('../Dataset/data/Total_Exposure_Log_Data.csv', index=False,
+Total_Exposure_Log_Data.to_csv('../data/dataset/process/Total_Exposure_Log_Data.csv', index=False,
                                header=Exposure_Log_Data_columns)
