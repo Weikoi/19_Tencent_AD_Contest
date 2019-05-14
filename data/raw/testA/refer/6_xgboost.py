@@ -11,7 +11,7 @@ import sys
 from xgboost import plot_importance
 from sklearn.preprocessing import Imputer
 
-pd.set_option('precision', 2)
+pd.set_option('precision', 4)
 
 def loadDataset(filePath):
     df = pd.read_csv(filepath_or_buffer=filePath)
@@ -59,6 +59,7 @@ def trainandTest(X_train, y_train, X_test):
 
     # 对测试集进行预测 并且对预测结果保留四位有效数字
     ans = model.predict(X_test)
+    print(ans)
 
     ans_len = len(ans)
     id_list = np.arange(1, ans_len + 1)
@@ -87,11 +88,17 @@ def trainandTest(X_train, y_train, X_test):
 if __name__ == '__main__':
     trainFilePath = '../Dataset/dataset_for_train/result_for_train_all.csv'
     testFilePath = '../Dataset/dataset_for_train/Test_Sample_Data_all.csv'
-    print("！！！！！！！！！正在加载数据集！！！！！！！！！")
+    print("==================正在加载数据集==================")
     data = loadDataset(trainFilePath)
-    print("训练集中的数据信息是:\n", data.info())
+    # print("训练集中的数据信息是:\n", data.info())
     X_test = loadTestData(testFilePath)
-    print("！！！！！！！！！正在构建模型的特征！！！！！！！！！！！")
+
+    print("==================正在构建模型的特征===============")
     X_train, y_train = featureSet(data)
-    print("！！！！！！正在训练中！！！！！！！！！！")
+    for i in range(len(X_train)):
+        print(X_train[i], y_train[i])
+    # print(X_train)
+    # print()
+    # print(y_train)
+    print("==================正在训练中======================")
     trainandTest(X_train, y_train, X_test)

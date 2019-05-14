@@ -47,7 +47,7 @@ if mode == '1000':
             # print(i, ':', line,'\n', len(line), type(line))
             line = line.strip().split('\t')
             # print(i, ':', line, type(line),'\n', len(line))
-            if i > 10000:
+            if i > 1000:
                 break
             userFeature_data.append(line)
 

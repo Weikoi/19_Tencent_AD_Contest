@@ -165,8 +165,6 @@ with open('../test_sample.dat', 'r') as f:
         if i % 100 == 0:
             print("\r当前进度: {:.2f}%".format((i + 1) * 100 / 20290), end="")
         # 测试的时候使用的数据
-        if i >= 1000:
-            break
         # sys.exit()
 
         # 原始数据每列属性的含义 修改数据之后每列属性的含义
@@ -261,7 +259,7 @@ with open('../test_sample.dat', 'r') as f:
         save_line.append(value_status)
         save_line.append(value_connectionType)
         save_line.append(value_behavior)
-
+        # print(save_line)
         # 保存最后的结果数据集
         Test_Sample_Data.append(save_line)
         if i == 2:

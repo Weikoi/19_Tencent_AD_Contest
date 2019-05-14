@@ -253,7 +253,7 @@ print("***********程序已经加载完毕，正在保存数据***************")
 print(len(people_line))
 chose_people = pd.DataFrame(people_line)
 print(chose_people.info())
-print(sys.getsizeof(chose_people) / 1024 / 1024 / 1024)
+print(sys.getsizeof(chose_people) / 1024 / 1024 / 1024, 'GB')
 
 # print(data_for_chose_people.info())
 # chose_people.to_csv('../Dataset/data/Chose_people_demo.csv', index=False)
