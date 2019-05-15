@@ -22,7 +22,7 @@ int_num_click = -3
 """
 # 测试样本中人群定向是all的时候 利用原始的user.data将数据集划分
 # 注意数据集的选取决定了训练集的数据量大小
-user_data = pd.read_csv('../data/dataset/process/userFeature.csv')
+user_data = pd.read_csv('../data/dataset/process/userFeature1000.csv')
 print("=============user_data==============", user_data.info())
 
 """
@@ -50,7 +50,7 @@ User_Area = user_data['Area']
 User_Area = list(User_Area)
 for i, temp_line in enumerate(User_Area):
     User_Area[i] = temp_line.strip().split(',')
-print(User_Area)
+# print(User_Area)
 
 result = []
 for idx, i in enumerate(User_Area):
@@ -154,7 +154,7 @@ User_Behavior = list(set(result_behavior))
 Str_User_Behavior = [str(x) for x in User_Behavior]
 all_Behavior = ' '.join(Str_User_Behavior)
 # print("用户数据集中Behavior的取值范围是", len(User_Behavior))
-print("用户数据集中所有的属性值已加载完毕！！！！")
+print("\n===========用户数据集中所有的属性值已加载完毕===========\n")
 
 
 # 需要重写测试集中的人群定向
@@ -268,4 +268,4 @@ with open('../data/raw/test_sample.dat', 'r') as f:
 # 测试成功！！！！！数据集保存正确
 user_feature = pd.DataFrame(Test_Sample_Data)
 print(user_feature.info())
-user_feature.to_csv('../data/dataset/result/Test_Sample_Data_all.csv', index=False, header=None)
+user_feature.to_csv('../data/dataset/result/test_sample_data_all.csv', index=False, header=None)

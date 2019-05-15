@@ -58,4 +58,7 @@ df = pd.DataFrame(data_dict)
 
 print(df)
 
-pk.dump(df, file=open(RAW_DF_PATH + "static.pkl", 'wb'))
+ad_id_set = set(ad_id)
+
+# pk.dump(df, file=open(RAW_DF_PATH + "static.pkl", 'wb'))
+pk.dump(ad_id_set, file=open(RAW_DF_PATH + "static_id_set.pkl", 'wb'))

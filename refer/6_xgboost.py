@@ -88,8 +88,8 @@ def trainandTest(X_train, y_train, X_test):
 
 
 if __name__ == '__main__':
-    trainFilePath = '../dataset/dataset_for_train/result_for_train_all.csv'
-    testFilePath = '../dataset/dataset_for_train/Test_Sample_Data_all.csv'
+    trainFilePath = '../data/dataset/result/train_dataset.csv'
+    testFilePath = '../data/dataset/result/Test_Sample_Data_all.csv'
     print("==================正在加载数据集==================")
     data = loadDataset(trainFilePath)
     # print("训练集中的数据信息是:\n", data.info())
@@ -98,7 +98,7 @@ if __name__ == '__main__':
     print("==================正在构建模型的特征===============")
     X_train, y_train = featureSet(data)
     for i in range(len(X_train)):
-        print(X_train[i], y_train[i])
+        print(y_train[i])
     # print(X_train)
     # print()
     # print(y_train)
