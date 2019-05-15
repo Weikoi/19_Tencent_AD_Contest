@@ -1,6 +1,8 @@
 import pandas as pd
 import sys
 import numpy as np
+import matplotlib.pyplot as plt
+from xgboost import plot_importance
 import xgboost as xgb
 from sklearn.metrics import accuracy_score
 from sklearn.model_selection import train_test_split, GridSearchCV
@@ -50,7 +52,7 @@ print("================== 正在构建模型 ================")
 选择训练模型
 """
 
-model = 'rf'
+model = 'xgb'
 
 """
 随机森林 单次验证 score 0.7678
@@ -127,14 +129,43 @@ if model == 'ada':
 xg boost 单次验证
 """
 if model == 'xgb':
-    xg_model = xgb.XGBRegressor(max_depth=5, learning_rate=0.1, n_jobs=-1, n_estimators=1000, silent=False,
+    xg_model = xgb.XGBRegressor(max_depth=9, learning_rate=0.3, n_jobs=-1, n_estimators=300, silent=False,
                                 objective='reg:gamma')
     xg_model.fit(X_train, y_train)
-    y_pred_xg = xg_model.predict(X_test)
-    y_test = [i + 0.001 for i in y_test]
-    print(type(y_test[0]))
-    print(type(y_pred_xg[0]))
-    print("xg boost:", accuracy_score(y_test, y_pred_xg))
+    y_pred_xg = xg_model.predict(X_sample)
+    print(len(y_pred_xg))
+    df = pd.DataFrame(np.random.rand(20290, 2))
+    df[0] = [i for i in range(1, 20291)]
+    df[1] = y_pred_xg
+    print(df)
+    df.to_csv("submission.csv", index=False, header=False)
+
+    # 显示重要特征
+    # plot_importance(xg_model)
+    # plt.show()
+
+"""
+xg boost 五折交叉
+Best: 0.953996 using {'learning_rate': 0.3, 'max_depth': 9, 'n_estimators': 300}
+"""
+if model == 'xgb_gs':
+    xg_model = xgb.XGBRegressor(max_depth=5, learning_rate=0.1, n_jobs=-1, n_estimators=1000, silent=False,
+                                objective='reg:gamma')
+
+    param_grid = {
+        "max_depth": [i for i in range(3, 10)],
+        "learning_rate": [i / 10 for i in range(1, 11, 2)],
+        "n_estimators": [i for i in range(200, 1100, 100)]}  # 转化为字典格式，网络搜索要求
+
+    grid_search = GridSearchCV(xg_model, param_grid, cv=5, n_jobs=-1)
+    grid_result = grid_search.fit(X_train, y_train)
+
+    # xg_model.fit(X_train, y_train)
+    # y_pred_xg = xg_model.predict(X_test)
+    #
+    # print("xg boost:", accuracy_score(y_test, y_pred_xg))
+    print("Best: %f using %s" % (grid_result.best_score_, grid_search.best_params_))
+    print("Test set score:{:.4f}".format(grid_search.score(X_test, y_test)))
     # 显示重要特征
     # plot_importance(model)
     # plt.show()

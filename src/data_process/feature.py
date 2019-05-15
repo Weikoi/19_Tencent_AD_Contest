@@ -1,11 +1,10 @@
 import pandas as pd
 
 Test_Sample_Data = []
-Test_Sample_Data_columns = ['Ad_material_size', 'ad_bid', 'Ad_account_id', 'Commodity_id',
+Test_Sample_Data_columns = ['ad_id', 'Ad_material_size', 'Ad_bid', 'Ad_account_id', 'Commodity_id',
                             'Commodity_type', 'Ad_Industry_Id']
 with open('../../data/raw/test_sample.dat', 'r') as f:
     for i, line in enumerate(f):
-
         save_line = []
         line = line.strip().split('\t')
         # print("line:", line, '\n', 'line[9]:', line[9], type(line))
@@ -25,4 +24,4 @@ with open('../../data/raw/test_sample.dat', 'r') as f:
 
 user_feature = pd.DataFrame(Test_Sample_Data)
 print(user_feature.info())
-user_feature.to_csv('../../data/temp2/test_sample_data.csv', index=False)
+user_feature.to_csv('../../data/temp2/test_sample_data.csv', index=False, header=Test_Sample_Data_columns)
