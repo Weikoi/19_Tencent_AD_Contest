@@ -12,6 +12,10 @@ import pandas as pd
 import datetime
 import time
 import pickle as pk
+import sys
+
+sys.path.append("../../")
+sys.path.append("../")
 
 load_all_method = True
 from util.global_constant import RAW_DF_PATH

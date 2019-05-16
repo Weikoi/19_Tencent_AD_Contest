@@ -6,7 +6,7 @@ from util.global_constant import RAW_DATA_PATH, RAW_DF_PATH, TEMP_DATA_PATH
 
 pd.set_option('display.max_columns', 30)
 
-file = open(RAW_DATA_PATH + "ad_operation.dat")
+file = open(RAW_DATA_PATH + "ad_operation.out")
 lines = file.readlines()
 
 ad_id = []

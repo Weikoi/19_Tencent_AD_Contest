@@ -6,5 +6,4 @@ def fun(a):
 
 
 fun(a)
-
 print(a)
