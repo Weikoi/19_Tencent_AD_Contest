@@ -4,6 +4,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 from xgboost import plot_importance
 import xgboost as xgb
+from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import accuracy_score
 from sklearn.model_selection import train_test_split, GridSearchCV
 from sklearn.ensemble import RandomForestClassifier, AdaBoostClassifier
@@ -52,7 +53,19 @@ print("================== 正在构建模型 ================")
 选择训练模型
 """
 
-model = 'xgb'
+model = 'lr'
+
+
+"""
+逻辑回归 单次验证：
+"""
+if model == 'lr':
+    log_clf = LogisticRegression()
+    log_clf.fit(X_train, y_train)
+    y_pred_lr = log_clf.predict(X_test)
+
+    print("ada boost:", accuracy_score(y_test, y_pred_lr))
+
 
 """
 随机森林 单次验证 score 0.7678
