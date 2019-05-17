@@ -531,16 +531,17 @@ Total_Exposure_Log_Data_March = pd.concat(
 
 Total_Exposure_Log_Data_March.to_csv('../../data/temp2/Total_Exposure_Log_Data_March.csv', index=False)
 
+
+# 拼接
 df_February = pd.read_csv('../../data/temp2/Total_Exposure_Log_Data_February.csv')
 df_March = pd.read_csv('../../data/temp2/Total_Exposure_Log_Data_March.csv')
 
 Total_Exposure_Log_Data = pd.concat([df_February, df_March]).reset_index(drop=True)
-Total_Exposure_Log_Data.to_csv('../data/dataset/process/Total_Exposure_Log_Data.csv', index=False,
+Total_Exposure_Log_Data.to_csv('../../data/temp2/Total_Exposure_Log_Data.csv', index=False,
                                header=Exposure_Log_Data_columns)
 
 
 Exposure_data = pd.read_csv('../../data/temp2/Total_Exposure_Log_Data.csv')
-Exposure_data.drop('Ad_Request_Time', axis=1, inplace=True)
 Exposure_data.drop('Ad_pos_id', axis=1, inplace=True)
 Exposure_data.drop('Ad_pctr', axis=1, inplace=True)
 Exposure_data.drop('Ad_quality_ecpm', axis=1, inplace=True)

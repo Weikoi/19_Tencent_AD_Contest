@@ -32,13 +32,13 @@ def loadTestData(filePath):
     return data
 
 
-trainFilePath = '../../data/temp2/final_train.csv'
+trainFilePath = '../../data/temp2/final_train_drop.csv'
 testFilePath = '../../data/temp2/test_sample_data.csv'
 print("================== 正在加载数据集 ==================")
 data = loadDataset(trainFilePath)
 X_sample = loadTestData(testFilePath)
 
-print("================== 正在构建数据特征 ===============")
+print("================== 正在构建数据特征 ================")
 X, y = featureSet(data)
 
 # print(X)
@@ -48,7 +48,7 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_
 # print("X_train 占用内存大小为：", round(sys.getsizeof(X_train) / 1024 / 1024, 2), "MB")
 
 
-print("================== 正在构建模型 ================")
+print("================== 正在构建模型 ===================")
 """
 选择训练模型
 """
@@ -144,7 +144,9 @@ if model == 'xgb':
                                 objective='reg:gamma')
     xg_model.fit(X_train, y_train)
     y_pred_xg = xg_model.predict(X_sample)
+
     print(len(y_pred_xg))
+
     df = pd.DataFrame(np.random.rand(38596, 2))
     df[0] = [i for i in range(1, 38597)]
     df[1] = [round(i, 4) for i in y_pred_xg]
