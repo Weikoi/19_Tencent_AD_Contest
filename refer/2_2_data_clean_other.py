@@ -5,6 +5,7 @@
 # @File    : Dataload_Ad_Data.py
 import pandas as pd
 import time
+import pickle as pk
 
 # 当load_ad值为 Static_Ad 表示清洗的是静态数据集
 load_ad = 'other'
@@ -44,8 +45,8 @@ if load_ad == 'Static_Ad':
 
             # 4-19新加该功能 静态广告时间的格式是2018/6/26 4:35:50
             # print(line[1], type(line[1]), line)
-            loacl_time = int(line[1])
-            time_local = time.localtime(loacl_time)
+            local_time = int(line[1])
+            time_local = time.localtime(local_time)
             line[1] = time.strftime("%Y-%m-%d %H:%M:%S", time_local)
 
             Ad_Static_Feature_Data.append(line)
@@ -73,25 +74,27 @@ else:
 
 
     def get_next_line(i_row):
-        line = linecache.getline('../data/raw/ad_operation.dat', (i_row))
+        line = linecache.getline('../../data/raw/ad_operation.dat', (i_row))
         line = line.strip().split('\t')
         # print("当前数据行的值是:", line)
 
-        line_next = linecache.getline('../data/raw/ad_operation.dat', (i_row + 1))
+        line_next = linecache.getline('../../data/raw/ad_operation.dat', (i_row + 1))
         line_next = line_next.strip().split('\t')
 
         return line_next
 
 
-    # 读取静态广告数据集中的广告ID将其转化成list数据
-    Exposure_Log_Data = pd.read_csv('../data/dataset/process/Ad_Static_Feature_Data.csv')
-
-    Ad_id_in_static = Exposure_Log_Data['ad_id']
-    Ad_time_in_static = Exposure_Log_Data['Creation_time']
-    # print("静态广告数据集中的广告id和时间分别是:\n", Ad_id_in_static.head(5), '\n', Ad_time_in_static.head(5))
+    # # 读取静态广告数据集中的广告ID将其转化成list数据
+    # Exposure_Log_Data = pd.read_csv('../data/dataset/process/Ad_Static_Feature_Data.csv')
+    #
+    # Ad_id_in_static = Exposure_Log_Data['ad_id']
+    # Ad_time_in_static = Exposure_Log_Data['Creation_time']
+    # # print("静态广告数据集中的广告id和时间分别是:\n", Ad_id_in_static.head(5), '\n', Ad_time_in_static.head(5))
 
     # 保存静态广告中广告ID和对应的时间  注意时间类型是str()
-    list_Ad_id_in_static = list(Ad_id_in_static)
+    list_Ad_id_in_static = pk.load(open("../../data/static_id_set.pkl", "rb"))
+
+    list_Ad_id = pk.load(open("../../data/temp/ad_id.pkl", "rb"))
     # print('静态广告数据集中广告ID的取值和数据类型分别是：',
     # len(list_Ad_id_in_static), list_Ad_id_in_static[0:5], type(list_Ad_id_in_static[0]))
     list_Ad_time_in_static = list(Ad_time_in_static)
@@ -121,10 +124,17 @@ else:
             if int(line[0]) not in list_Ad_id_in_static:
                 # print("*******该条数据不存在于静态数据集之中，需要删除*******", line)
                 continue
+            # 首先需要判断该条数据是否在静态数据集之中 不存在则删除
+            if int(line[0]) not in list_Ad_id:
+                # print("*******该条数据不存在于静态数据集之中，需要删除*******", line)
+                continue
 
             # 使用line[2]修改广告操作数据集中的时间选项 并进行保存 验证成功
             if '20190230' in line[1]:
                 # print('数据集中出现2月30号的数据已删除', line)
+                continue
+
+            if line[1] == '0':
                 continue
 
             # 首先需要广告操作数据集中的训练时间
@@ -137,6 +147,8 @@ else:
                 data_list.insert(16, ':')
                 line[1] = ''.join(data_list)
                 # print(line[1])
+            else:
+                continue
 
             if line[2] == '2':
                 # 修改广告的操作时间
@@ -170,7 +182,7 @@ else:
                 continue
 
             else:
-                print("广告操作类型既不是新建，也不是修改，:\n", line)
+                print("广告操作类型既不是新建，也不是修改??????>>>>:\n", line)
                 sys.exit()
 
             Ad_Operation_Data.append(line)
@@ -182,4 +194,4 @@ else:
     # print("***********userFeature_data[0][1]:\n", Ad_Operation_Data[9][1])
 
     Ad_Operation_Data = pd.DataFrame(Ad_Operation_Data)
-    Ad_Operation_Data.to_csv('../data/dataset/process/Ad_Operation_Data.csv', index=False, header=False)
+    Ad_Operation_Data.to_csv('../../data/temp2/ad_operation_data.csv', index=False, header=False)

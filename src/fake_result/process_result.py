@@ -1,10 +1,6 @@
 import pandas as pd
+import matplotlib.pyplot as plt
 
-data = pd.read_csv("submission.csv")
+data = pd.read_csv("../../data/temp2/final_train_drop.csv")
 
-for idx, i in enumerate(data.iloc[:, 1]):
-    data.iloc[idx, 1] = round(i, 4)
-#
-# print(data)
-data.to_csv("submission2.csv", index=False)
-print(data)
+data.merge

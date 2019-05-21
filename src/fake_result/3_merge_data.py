@@ -4,7 +4,7 @@ import pandas as pd
 
 pd.set_option('display.max_columns', 20)
 
-log_df = pd.read_csv('../../data/temp2/Total_Exposure_Log_Data_drop.csv')
+log_df = pd.read_csv('../../data/temp2/Total_Exposure_Log_Data.csv')
 static_df = pd.read_csv('../../data/temp2/Ad_Static_Feature_Data_drop.csv')
 
 
